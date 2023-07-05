@@ -2,8 +2,10 @@
 
 import boto3
 import pandas as pd
-from decouple import config
-
+import os
+from dotenv import load_dotenv, find_dotenv
+# https://stackoverflow.com/questions/73642345/how-to-securely-pass-credentials-in-python
+load_dotenv(find_dotenv())  
 from io import StringIO
 
 
@@ -11,8 +13,9 @@ class ReadWriteFromS3:
     """This class is used to read and write to s3"""
     @classmethod
     def create_con_string(cls, bucket_name, key):
-        secret_key = config("aws_secret_key")
-        access_key = config("aws_access_key")
+        
+        access_key  = os.getenv("ACCESS_KEY_ID"),  
+        secret_key = os.getenv("SECRET_ACCESS_KEY")
 
         s3_conn = boto3.resource("s3", aws_access_key_id = access_key, aws_secret_access_key = secret_key)
 
