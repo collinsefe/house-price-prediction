@@ -41,8 +41,8 @@ class ReadWriteFromS3:
         df.to_csv(csv_buffer, index=False)
         self.conn.Object(self.bucket_name, file_name).put(Body=csv_buffer.getvalue())
 
-    def create_bucket(self, bucket_name):
-        pass
+    # def create_bucket(self, bucket_name):
+    #     pass
 
 
 def get_data(url):
